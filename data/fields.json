@@ -1,0 +1,78 @@
+{
+    "name": {
+        "type": "text",
+        "display": "Name",
+        "placeholder": "Enter name",
+        "pattern": "",
+        "hint": "Your Name",
+        "minlength": 3,
+        "required": true
+    },
+    "email": {
+        "type": "email",
+        "display": "Email",
+        "placeholder": "Enter email",
+        "pattern": "",
+        "hint": "Your Email address"
+    },
+    "password": {
+        "type": "password",
+        "display": "Password",
+        "placeholder": "Enter password",
+        "pattern": "",
+        "minlength": 8,
+        "hint": "Password"
+    },
+    "gender": {
+        "type": "hidden",
+        "display": "Gender",
+        "placeholder": "Enter gender",
+        "pattern": "^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,100}$",
+        "hint": "Gender"
+    },
+    "date_of_birth": {
+        "type": "date",
+        "display": "Date of birth",
+        "placeholder": "Enter date of birth",
+        "min": "1900-01-01",
+        "max": "today",
+        "hint": "Date of birth"
+    },
+    "country": {
+        "type": "hidden",
+        "display": "Country",
+        "placeholder": "Enter country",
+        "pattern": "",
+        "hint": "Country"
+    },
+    "city": {
+        "type": "hidden",
+        "display": "City",
+        "placeholder": "Enter city",
+        "pattern": "",
+        "hint": "City"
+    },
+    "address1": {
+        "type": "hidden",
+        "display": "Address #1",
+        "placeholder": "Enter address1",
+        "pattern": "",
+        "hint": "Address #1"
+    },
+    "address2": {
+        "type": "hidden",
+        "display": "Address #2",
+        "placeholder": "Enter address2",
+        "pattern": "",
+        "hint": "Address #2"
+    },
+    "postcode": {
+        "type": "number",
+        "display": "Post code",
+        "placeholder": "Enter postcode",
+        "pattern": "",
+        "minlength": 4,
+        "maxlength": 5,
+        "hint": "Post code"
+    }
+}
