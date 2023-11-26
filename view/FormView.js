@@ -11,7 +11,7 @@ export default class FormView {
         this.#szuloElem.append('<form class="was-validated">');
         this.#formElem = szuloElem.find('form');
         axios
-            .get("/data/fields.json")
+            .get(new URL("data/fields.json", window.location.href).href)
             .then((response) => {
                 console.log("resp", response);
                 this.createFormContent(response.data)
