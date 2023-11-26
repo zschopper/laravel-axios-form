@@ -19,7 +19,7 @@
         "type": "password",
         "display": "Password",
         "placeholder": "Enter password",
-        "pattern": "",
+        "pattern": "^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,100}$",
         "minlength": 8,
         "hint": "Password"
     },
@@ -27,7 +27,7 @@
         "type": "hidden",
         "display": "Gender",
         "placeholder": "Enter gender",
-        "pattern": "^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,100}$",
+        "pattern": "",
         "hint": "Gender"
     },
     "date_of_birth": {
