@@ -6,7 +6,7 @@ export default class FormInputElementView {
     #validAttribs
     #validBoolAttribs
 
-    constructor(parentElement, fieldName, fieldData) {
+    constructor(parentElement, fieldName, fieldData, value) {
 
         this.#fieldName = fieldName
         this.#validAttribs = [
@@ -25,6 +25,9 @@ export default class FormInputElementView {
             'required',
         ]
 
+        let valueAttrib = value == null? '': `value="${value}"`
+        console.log("valueAttrib", value);
+
         let attribs = this.createAttribHtml(fieldData);
         parentElement.append(`
             <div class="row g-3 align-items-center">
@@ -36,6 +39,7 @@ export default class FormInputElementView {
                         class="form-control"
                         id="${fieldName}"
                         name="${fieldName}"
+                        ${valueAttrib}
                         ${attribs} />
                 </div>
                 <div class="col-auto">

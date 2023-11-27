@@ -1,17 +1,26 @@
+import DataService from "../model/DataService.js";
+import UserModel from "../model/UserModel.js";
 import FormView from "../view/FormView.js";
+
 
 export default class FormController {
 
     #baseUrl;
-    #parentElememt;
+    #parentElement;
     #inputElement
 
     constructor(baseUrl, parentElement) {
+        this.#baseUrl = baseUrl;
+        this.#parentElement = parentElement;
+
         console.log("Controller");
 
-        this.#baseUrl = baseUrl;
-        this.#parentElememt = parentElement;
-        let uv = new FormView(this.#parentElememt);
+        let ds = new DataService(baseUrl);
+        // ds.viewModel(UserModel);
+        ds.showModel(UserModel, 12, (data) => {
+            new FormView(this.#parentElement, data);
+        });
+
     }
 
     // load() {

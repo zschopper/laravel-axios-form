@@ -2,32 +2,34 @@ import FormInputElementView from "./FormInputElementView.js";
 
 export default class FormView {
 
-    #szuloElem
-    #formElem
+    #szuloElement
+    #formElement
     #inputs = []
 
-    constructor(szuloElem) {
-        this.#szuloElem = szuloElem;
-        this.#szuloElem.append('<form class="was-validated">');
-        this.#formElem = szuloElem.find('form');
+    constructor(parentElement, data) {
+        this.#szuloElement = parentElement;
+        this.#szuloElement.append('<form class="was-validated">');
+        this.#formElement = parentElement.find('form');
         axios
             .get(new URL("data/fields.json", window.location.href).href)
             .then((response) => {
-                console.log("resp", response);
-                this.createFormContent(response.data)
-            })
+                console.log("fields.json resp", response);
+                console.log("fields.json user data", data);
+                this.createFormContent(response.data, data)
+            }, data)
     }
 
-    createFormContent(fields) {
+    createFormContent(fields, data) {
         this.#inputs = [];
         for (const [name, field] of Object.entries(fields)) {
+            const value = data[name] ? data[name] : null;
             switch (field.type) {
                 case "email":
                 case "text":
                 case "number":
                 case "date":
                 case "password":
-                    this.#inputs.push(new FormInputElementView(this.#formElem, name, field));
+                    this.#inputs.push(new FormInputElementView(this.#formElement, name, field, value));
                     break;
                 case "hidden":
                     break;
@@ -36,18 +38,18 @@ export default class FormView {
             }
         }
 
-        this.#formElem.append(`
+        this.#formElement.append(`
             <div class="form-check mb-3">
               <label class="form-check-label">
                 <input class="form-check-input" type="checkbox" name="remember"> Remember me
               </label>
             </div>`
         );
-        this.#formElem.append(`
+        this.#formElement.append(`
             <button type="sxubmit" class="btn btn-primary">Submit</button>`
         );
 
-        this.#formElem.find("button").on("click", (event) => { event.preventDefault(); this.formSubmitClick(event) })
+        this.#formElement.find("button").on("click", (event) => { event.preventDefault(); this.formSubmitClick(event) })
     }
 
     formSubmitClick(event) {

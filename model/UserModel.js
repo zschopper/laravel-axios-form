@@ -1,5 +1,17 @@
 export default class UserModel {
-    constructor(data) {
+
+    static path = 'users';
+    static idField = 'id';
+
+    constructor(data = null) {
+
+        if (data != null) {
+            this.loadFromData(data);
+        }
+    }
+
+    loadFromData(data) {
+        this.id = data.id
         this.name = data.name;
         this.email = data.email;
         this.gender = data.gender;
@@ -9,5 +21,9 @@ export default class UserModel {
         this.address1 = data.address1;
         this.address2 = data.address2;
         this.postcode = data.postcode;
+    }
+
+    get idValue() {
+        return this[this.idField];
     }
 }
