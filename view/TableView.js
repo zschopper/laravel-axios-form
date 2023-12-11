@@ -1,6 +1,7 @@
 import DataService from "../model/DataService.js";
 import UserModel from "../model/UserModel.js";
 import FormInputElementView from "./FormInputElementView.js";
+import RowView from "./RowView.js";
 
 export default class TableView {
 
@@ -9,6 +10,7 @@ export default class TableView {
     #tbodyElement
     #model
     #data
+    #rowViews
 
     constructor(model, parentElement, data) {
         this.#model = model;
@@ -16,6 +18,7 @@ export default class TableView {
         this.#parentElement = parentElement;
         this.#tableElement = this.#parentElement.append('<table class="table table-striped table-hoverd table-sm"><thead class="thead-dark"><tr scope="row"></tr></thead><tbody></tbody></table>');
         this.#tbodyElement = this.#tableElement.find("tbody");
+        this.#rowViews = [];
         this.renderTable();
     }
 
@@ -28,29 +31,9 @@ export default class TableView {
             }
         }
         thtr.append(`<th>Műveletek</th>`)
+
         this.#data.forEach((data) => {
-            let row = "<tr>";
-            for (const [field, display] of Object.entries(this.#model.displayFields)) {
-                if (display.displayOnList) {
-                    row += `<td>${data[field]}</td>`
-                }
-            }
-            row += '<td>'
-            row += '<button class="btn btn-info"><i class="fa-solid fa-magnifying-glass"></i></button>&nbsp;'
-            row += '<button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>&nbsp;'
-            row += '<button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>'
-            row += '</td>'
-            row += '</tr>'
-            this.#tbodyElement.append(row);
-            $('table tbody tr:last-child button.btn-info').on('click', (event) => {
-                window.dispatchEvent(new CustomEvent('onDataShow', { detail: {sender: this, data: data, id: data.id }}));
-            })
-            $('table tbody tr:last-child button.btn-warning').on('click', (event) => {
-                window.dispatchEvent(new CustomEvent('onDataEdit', { detail: {sender: this, data: data, id: data.id }}));
-            })
-            $('table tbody tr:last-child button.btn-danger').on('click', (event) => {
-                window.dispatchEvent(new CustomEvent('onDataDestroy', { detail: {sender: this, data: data, id: data.id }}));
-            })
+            this.#rowViews.push(new RowView(this.#model, this.#tbodyElement, data))
 
         });
 

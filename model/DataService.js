@@ -25,20 +25,16 @@ export default class DataService {
 
         axios.get(url)
             .then((response) => {
-                console.log("view then", response.data);
                 let resp = [];
                 response.data.forEach(element => {
                     resp.push(new model(element))
                 });
-                console.log("view model", resp);
                 callback(resp)
             })
             .catch((error) => {
                 console.log("error", error);
             })
             .finally(() => { })
-        console.log("view end");
-
     }
 
     // GET|HEAD        api/users/{user}    users.show
