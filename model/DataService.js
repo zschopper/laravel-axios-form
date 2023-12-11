@@ -42,9 +42,7 @@ export default class DataService {
         let url = DataService.#makeurl([DataService.#baseUrl, model.path, id]);
         axios.get(url)
             .then((response) => {
-                console.log("show then", response.data);
                 let resp = new model(response.data);
-                console.log("show model", resp);
                 callback(resp)
             })
             .catch((error) => {
@@ -58,16 +56,13 @@ export default class DataService {
         let url = DataService.#makeurl([DataService.#baseUrl, model.path]);
         axios.post(url, model)
             .then((response) => {
-                console.log("store then", response.data);
                 let resp = new model(response.data);
-                console.log("store model", resp);
                 callback(resp)
             })
             .catch((error) => {
                 console.log("error", error);
             })
             .finally(() => { })
-
     }
 
     // PUT|PATCH       api/users/{user}    users.update

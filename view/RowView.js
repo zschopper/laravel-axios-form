@@ -19,9 +19,9 @@ export default class RowView {
             }
         }
         row += '<td>'
-        row += '<button class="btn btn-info"><i class="fa-solid fa-magnifying-glass"></i></button>&nbsp;'
-        row += '<button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>&nbsp;'
-        row += '<button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>'
+        row += '<button class="btn btn-xs btn-info"><i class="fa-solid fa-magnifying-glass"></i></button>&nbsp;'
+        row += '<button class="btn btn-xs btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>&nbsp;'
+        row += '<button class="btn btn-xs btn-danger"><i class="fa-solid fa-trash"></i></button>'
         row += '</td>'
         row += '</tr>'
         this.#parentElement.append(row);

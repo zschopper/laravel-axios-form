@@ -17,35 +17,10 @@ export default class FormController {
             new FormView(this.#parentElement, data);
         });
 
+
+
+        // <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        // <button type="button" class="btn btn-primary">Save changes</button>
+
     }
-
-    // load() {
-    //     let cb = this.createModelList;
-
-    //     axios.defaults.baseURL = this.#baseUrl;
-    //     console.log("baseurl", this.#baseUrl);
-
-    //     axios(this.#baseUrl)
-    //         .then((response) => {
-    //             this.createModelList(response.data);
-    //         })
-    //         .catch(function (error) {
-    //             console.log("error", error)
-    //         })
-    // }
-
-    // createModelList(data) {
-    //     let list = [];
-
-
-    //     data.forEach(element => {
-    //         console.log("element", element);
-
-    //         list.push(new UserModel(element));
-    //     });
-    //     console.log("data", list);
-
-    //     new CustomEvent('onDataChange', { detail: this, modelList: list });
-    //     return list;
-    // }
 }

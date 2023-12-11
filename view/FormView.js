@@ -10,6 +10,27 @@ export default class FormView {
         this.#szuloElement = parentElement;
         this.#szuloElement.append('<form class="was-validated">');
         this.#formElement = parentElement.find('form');
+
+        $(window).on("onDataCreate", ((event) => {
+            // create an empty form
+            console.table(event.detail)
+        }));
+
+        $(window).on("onDataShow", ((event) => {
+            // show selected item (read-only)
+            console.table(event.detail)
+        }));
+
+        $(window).on("onDataEdit", ((event) => {
+            // show loaded form (to update)
+            console.table(event.detail)
+        }));
+
+        $(window).on("onDataDestroy", ((event) => {
+            // ##delete item
+            console.table(event.detail)
+        }));
+
         axios
             .get(new URL("data/fields.json", window.location.href).href)
             .then((response) => {

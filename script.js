@@ -7,9 +7,11 @@ $(function () {
 
     DataService.setBaseUrl('http://localhost:8000/api/');
 
-    // let fcParent = $('.form-container');
-    // let fc = new FormController(fcParent);
+    let fcParent = $('#dataViewModal div.form');
+    let fc = new FormController(fcParent);
 
     let tcParent = $('.table-container');
     let tc = new TableController(tcParent);
+    let myModal = document.getElementById('modal');
+
 });

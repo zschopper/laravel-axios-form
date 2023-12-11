@@ -9,7 +9,7 @@ export default class TableController {
     constructor(parentElement) {
         this.#parentElement = parentElement;
 
-        $(window).on("onDataShow", ((event) => {
+        $(window).on("onDataView", ((event) => {
             // show all items (refresh?)
             console.table(event.detail)
         }));
@@ -21,22 +21,22 @@ export default class TableController {
             // save new item (from create)
             console.table(event.detail)
         }));
-        $(window).on("onDataShow", ((event) => {
-            // show selected item
-            console.table(event.detail)
-        }));
-        $(window).on("onDataEdit", ((event) => {
-            // show loaded form (to update)
-            console.table(event.detail)
-        }));
+        // $(window).on("onDataShow", ((event) => {
+        //     // show selected item
+        //     console.table(event.detail)
+        // }));
+        // $(window).on("onDataEdit", ((event) => {
+        //     // show loaded form (to update)
+        //     console.table(event.detail)
+        // }));
         $(window).on("onDataUpdate", ((event) => {
             // update data (from edit)
             console.table(event.detail)
         }));
-        $(window).on("onDataDestroy", ((event) => {
-            // ##delete item
-            console.table(event.detail)
-        }));
+        // $(window).on("onDataDestroy", ((event) => {
+        //     // ##delete item
+        //     console.table(event.detail)
+        // }));
 
         this.load();
     }
