@@ -5,19 +5,15 @@ import FormView from "../view/FormView.js";
 
 export default class FormController {
 
-    #baseUrl;
     #parentElement;
     #inputElement
 
-    constructor(baseUrl, parentElement) {
-        this.#baseUrl = baseUrl;
+    constructor(parentElement) {
         this.#parentElement = parentElement;
 
         console.log("Controller");
 
-        let ds = new DataService(baseUrl);
-        // ds.viewModel(UserModel);
-        ds.showModel(UserModel, 12, (data) => {
+        DataService.showModel(UserModel, 1, (data) => { // 12
             new FormView(this.#parentElement, data);
         });
 

@@ -1,58 +1,94 @@
 export default class DataService {
 
-    #baseUrl
-    constructor(baseUrl) {
-        this.#baseUrl = baseUrl;
+    static #baseUrl;
+    static #instance = undefined;
+
+    static getInstance() {
+        if (DataService.#instance == unknown) {
+            DataService.#instance = new DataService();
+        }
+        return DataService.#instance;
     }
 
-    #makeurl(elements) {
+    static setBaseUrl(baseUrl) {
+        DataService.#baseUrl = baseUrl;
+    }
+
+    static #makeurl(elements) {
         return elements.map((e) => String(e).replace(/\/+$/, '')).join('/');
     }
 
-    viewModel(model) {
-        let url = this.#baseUrl + model.path;
-        console.log(this.#baseUrl + model.path);
+    // GET|HEAD        api/users           users.index
+    static viewModel(model, callback) {
+        let url = DataService.#baseUrl + model.path;
+        console.log(DataService.#baseUrl + model.path);
 
         axios.get(url)
             .then((response) => {
-                console.log("then", response.data );
+                console.log("view then", response.data);
                 let resp = [];
                 response.data.forEach(element => {
                     resp.push(new model(element))
                 });
-                console.log("model", resp);
-             })
-            .catch((error) => { console.log("error", error );
+                console.log("view model", resp);
+                callback(resp)
+            })
+            .catch((error) => {
+                console.log("error", error);
             })
             .finally(() => { })
+        console.log("view end");
+
     }
 
-    showModel(model, id, callback) {
-        let url = this.#makeurl([this.#baseUrl, model.path, id]);
+    // GET|HEAD        api/users/{user}    users.show
+    static showModel(model, id, callback) {
+        let url = DataService.#makeurl([DataService.#baseUrl, model.path, id]);
         axios.get(url)
             .then((response) => {
-                console.log("then", response.data );
+                console.log("show then", response.data);
                 let resp = new model(response.data);
-                console.log("model", resp);
+                console.log("show model", resp);
                 callback(resp)
-             })
-            .catch((error) => { console.log("error", error );
+            })
+            .catch((error) => {
+                console.log("error", error);
+            })
+            .finally(() => { })
+    }
+
+    // POST            api/users           users.store
+    static storeModel(model) {
+        let url = DataService.#makeurl([DataService.#baseUrl, model.path]);
+        axios.post(url, model)
+            .then((response) => {
+                console.log("store then", response.data);
+                let resp = new model(response.data);
+                console.log("store model", resp);
+                callback(resp)
+            })
+            .catch((error) => {
+                console.log("error", error);
             })
             .finally(() => { })
 
     }
 
-    storeModel() {
+    // PUT|PATCH       api/users/{user}    users.update
+    static updateModel() {
 
     }
 
-    updateModel() {
+    // DELETE          api/users/{user}    users.destroy
+    static destroyModel() {
 
     }
-
-    destroyModel() {
-
-    }
-
 
 }
+/*
+  GET|HEAD        api/users           users.index
+  POST            api/users           users.store
+  GET|HEAD        api/users/{user}    users.show
+  PUT|PATCH       api/users/{user}    users.update
+  DELETE          api/users/{user}    users.destroy
+*/

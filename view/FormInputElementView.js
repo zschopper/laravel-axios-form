@@ -26,9 +26,8 @@ export default class FormInputElementView {
         ]
 
         let valueAttrib = value == null? '': `value="${value}"`
-        console.log("valueAttrib", value);
-
         let attribs = this.createAttribHtml(fieldData);
+
         parentElement.append(`
             <div class="row g-3 align-items-center">
                 <div class="col-2">
